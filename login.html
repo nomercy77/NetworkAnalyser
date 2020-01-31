@@ -1,0 +1,46 @@
+// Login Page ::( login.html)                                   
+
+<!DOCTYPE html>
+<html>
+<body bgcolor="#D3D3D3">
+<form action="login.php" method="POST">
+<center>
+<h3>NETWORK MONITORING TOOL</h3>
+Username:<br>
+<input type="text" name="username">
+<br>
+Password:<br>
+<input type="password" name="password">
+<br><br>
+<input type="submit" value="login"></center>
+</form>
+
+</body>
+</html>
+
+
+2) Login Page::(login.php)
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+$con=mysql_connect("localhost","root","") or die("Failed to connect to MySQL: ". mysql_error());
+$db=mysql_select_db("nmt",$con) or die("Failed to connect to MySQL: ". mysql_error());
+$query=mysql_query("SELECT * FROM login where username ='$_POST[username]' AND password = '$_POST[password]'") or die(mysql_error());
+$a=mysql_num_rows($query);
+if($a>0)
+{
+  echo "You are now logged in.</br></br>";
+        echo"<a href='choice.php'>Click here for the next page</a>";
+}
+else
+{
+  echo "Incorrect username and/or password.</br></br>";
+}
+
+?>
+</body>
+</html>
+
